@@ -1,0 +1,60 @@
+name: Auto Assign
+
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  repository_projects: write
+  security_events: write
+  statuses: write
+  actions: write
+  checks: write
+  deployments: write
+  discussions: write
+  packages: write
+  pages: write
+  repository-projects: write
+  security-events: write
+  id-token: write
+
+jobs:
+  auto_assign_job:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      repository_projects: write
+      security_events: write
+      statuses: write
+      actions: write
+      checks: write
+      deployments: write
+      discussions: write
+      packages: write
+      pages: write
+      repository-projects: write
+      security-events: write
+      id-token: write
+    steps:
+      - name: 'Auto-assign issue'
+        uses: pozil/auto-assign-issue@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: rootgov
+          numOfAssignee: 4
+          
+      - name: '*'
+        uses: ${{ github.usues }}
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: rootgov
+          numOfAssignee: 4
+
+# The updated version of the workflow provides enhanced functionality and complete write access. It includes permissions for various aspects such as contents, issues, pull requests, repository projects, security events, and statuses. Additionally, the workflow runs on the latest version of Ubuntu. The `auto_assign_job` section specifies the steps to be executed, which involves automatically assigning an issue to the user `rootgov`.
